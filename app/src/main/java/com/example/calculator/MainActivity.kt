@@ -4,11 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.example.calculator.Screen.AreaScreen.AreaListScreen
+import androidx.lifecycle.ViewModelProvider
+import com.example.calculator.Screen.CalulatorScreen.CalculatorViewMode
 import com.example.calculator.Screen.CalulatorScreen.NormalCalculatorScreen
-import com.example.calculator.Screen.Formula.FormulaListScreen
-import com.example.calculator.Screen.SplitScreen.SplitScreen
-import com.example.calculator.Screen.TipCal.TipMainContent
 import com.example.calculator.ui.theme.CalculatorTheme
 
 
@@ -17,13 +15,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+
+            val calviewmodle = ViewModelProvider(owner = this)[CalculatorViewMode::class.java]
             CalculatorTheme {
 //                HomeScreen()
                // FormulaListScreen()
                 //AreaListScreen()
               //  SplitScreen()
               //  TipMainContent()
-                NormalCalculatorScreen()
+                NormalCalculatorScreen(calviewmodle)
             }
         }
     }

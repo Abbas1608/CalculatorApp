@@ -32,28 +32,39 @@ import androidx.compose.ui.unit.sp
 import com.example.calculator.Harder.TopBarHarder
 import com.example.calculator.R
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.runtime.livedata.observeAsState
 import com.example.calculator.ui.theme.HCardBrush
 
 
-@Preview(showSystemUi = true)
 @Composable
-fun NormalCalculatorScreen()
+fun NormalCalculatorScreen(calviewmodle: CalculatorViewMode)
 {
     Column {
         TopBarHarder()
-        Calculator()
+        Calculator(calviewmodle)
     }
 }
 
 @Composable
-fun Calculator() {
+fun Calculator(viewMode: CalculatorViewMode) {
+    val equationText = viewMode.equationText.observeAsState()
+    val resultText = viewMode.resultText.observeAsState()
+
     val elementList = listOf<String>(
         "AC", "⌫", "%", "/",
         "7", "8", "9", "X",
         "4", "5", "6", "-",
         "1", "2", "3", "+",
-         ".", "0", "="
+        ".", "0", "="
+
+//        "AC", "⌫", "(", ")",
+//        "7", "8", "9", "X",
+//        "4", "5", "6", "-",
+//        "1", "2", "3", "+",
+//        ".", "0", "%","/"
     )
         Column(
             horizontalAlignment = Alignment.End,
@@ -62,7 +73,7 @@ fun Calculator() {
 
             Spacer(modifier = Modifier.height(20.dp))
             Text(
-                text = "123+453",
+                text =equationText.value?:"",
                 fontSize = 30.sp,
                 style = TextStyle(
                     textAlign = TextAlign.End
@@ -74,7 +85,7 @@ fun Calculator() {
             Spacer(modifier = Modifier.weight(1f))
 
             Text(
-                text = "546",
+                text = resultText.value?:"0",
                 fontSize = 60.sp,
                 style = TextStyle(
                     textAlign = TextAlign.End,
@@ -97,12 +108,16 @@ fun Calculator() {
             ) {
                 // Add all items except the equal button
                 items(elementList.filter { it != "=" }) { symbol ->
-                    CalculatorButton(symbol)
+                    CalculatorButton(symbol, onClick = {
+                        viewMode.onButtonClick(symbol)
+                    })
                 }
 
-                // Add the equal button with span of 2
+//                // Add the equal button with span of 2
                 item(span = { GridItemSpan(2) }) {
-                    CalculatorButton("=")
+                    CalculatorButton("=",{
+                        viewMode.onButtonClick("=")
+                    })
                 }
             }
         }
@@ -110,7 +125,7 @@ fun Calculator() {
 
 
 @Composable
-fun CalculatorButton(symbol: String) {
+fun CalculatorButton(symbol: String, onClick :()-> Unit) {
     val modifier = Modifier
         .aspectRatio(if (symbol == "=") 2f else 1f)
         .fillMaxWidth()
@@ -120,11 +135,10 @@ fun CalculatorButton(symbol: String) {
 
     when (symbol) {
         "AC" -> {
-            Button(
-                onClick = {
-                    Log.d("Ac","ac")
-                },
-                colors = ButtonDefaults.buttonColors(Color.White),
+            FloatingActionButton(
+                onClick = onClick,
+                containerColor = Color.White,
+                contentColor = Color.Red,
                 modifier = modifier,
             ) {
                 Text(
@@ -137,9 +151,10 @@ fun CalculatorButton(symbol: String) {
         }
 
         "⌫" -> {
-            Button(
-                onClick = { },
-                colors = ButtonDefaults.buttonColors(Color.White),
+            FloatingActionButton (
+                onClick = onClick,
+                containerColor = Color.White,
+                contentColor = colorResource(R.color.Blue),
                 modifier = modifier
             ) {
                 Text(symbol, color = colorResource(R.color.Light_blue), fontSize = 28.sp
@@ -147,10 +162,11 @@ fun CalculatorButton(symbol: String) {
             }
         }
 
-        "%", "/", "X"-> {
-            Button(
-                onClick = { },
-                colors = ButtonDefaults.buttonColors(Color.White),
+        "%", "/", "X","(",")"-> {
+            FloatingActionButton (
+                onClick = onClick,
+                containerColor = Color.White,
+                contentColor = colorResource(R.color.Blue),
                 modifier = modifier
             ) {
                 Text(
@@ -162,9 +178,10 @@ fun CalculatorButton(symbol: String) {
         }
 
         "-"->{
-            Button(
-                onClick = { },
-                colors = ButtonDefaults.buttonColors(Color.White),
+            FloatingActionButton (
+                onClick = onClick,
+                containerColor = Color.White,
+                contentColor = colorResource(R.color.Blue),
                 modifier = modifier
             ) {
                 Text(
@@ -176,9 +193,10 @@ fun CalculatorButton(symbol: String) {
         }
 
         "+"->{
-            Button(
-                onClick = { },
-                colors = ButtonDefaults.buttonColors(Color.White),
+            FloatingActionButton (
+                onClick = onClick,
+                containerColor = Color.White,
+                contentColor = colorResource(R.color.Blue),
                 modifier = modifier
             ) {
                 Text(
@@ -195,6 +213,7 @@ fun CalculatorButton(symbol: String) {
                 modifier = modifier.background(
                     brush = HCardBrush
                 )
+                    .clickable(onClick = onClick)
             ) {
                 Text(
                     symbol, fontSize = 50.sp, fontWeight = FontWeight.Bold,
@@ -204,9 +223,10 @@ fun CalculatorButton(symbol: String) {
         }
 
         else -> {
-            Button(
-                onClick = { },
-                colors = ButtonDefaults.buttonColors(Color.White),
+            FloatingActionButton (
+                onClick = onClick,
+                containerColor = Color.White,
+                contentColor = colorResource(R.color.Blue),
                 modifier = modifier
             ) {
                 Text(

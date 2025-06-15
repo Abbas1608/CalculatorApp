@@ -59,4 +59,9 @@ dependencies {
 
     // icon
     implementation ("androidx.compose.material:material-icons-extended:$1.7.7")
+    // livedata runtime
+    implementation("androidx.compose.runtime:runtime-livedata:1.8.2")
+
+    // mozilla (calculation part)
+    implementation("org.mozilla:rhino:1.7R4")
 }
