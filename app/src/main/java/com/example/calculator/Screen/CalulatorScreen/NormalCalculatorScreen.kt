@@ -1,7 +1,6 @@
 package com.example.calculator.Screen.CalulatorScreen
 
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,8 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.GridItemSpan
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,7 +23,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.calculator.Harder.TopBarHarder
@@ -35,27 +31,42 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.draw.BlurredEdgeTreatment.Companion.Rectangle
+import androidx.compose.ui.graphics.Outline
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.example.calculator.ui.theme.HCardBrush
 
 
 @Composable
-fun NormalCalculatorScreen(calviewmodle: CalculatorViewMode)
+fun NormalCalculatorScreen(NavController: NavHostController)
 {
+    val calviewmodel: CalculatorViewModel = viewModel()
+
+//    val calviewmodle = ViewModelProvider(owner = this)[CalculatorViewModel::class.java]
     Column {
-        TopBarHarder()
-        Calculator(calviewmodle)
+        TopBarHarder(NavController)
+        Calculator(calviewmodel)
     }
 }
 
 @Composable
-fun Calculator(viewMode: CalculatorViewMode) {
+fun Calculator(viewMode: CalculatorViewModel) {
     val equationText = viewMode.equationText.observeAsState()
     val resultText = viewMode.resultText.observeAsState()
 
+    val displayMultiply = "X"
+    val calculateMultiply = "*"
+    val displayDivide = "÷"
+    val calculateDivide = "/"
+
+
     val elementList = listOf<String>(
-        "AC", "⌫", "%", "/",
-        "7", "8", "9", "X",
+
+        "AC", "⌫", "%", displayDivide,
+        "7", "8", "9", displayMultiply,
         "4", "5", "6", "-",
         "1", "2", "3", "+",
         ".", "0", "="
@@ -109,7 +120,14 @@ fun Calculator(viewMode: CalculatorViewMode) {
                 // Add all items except the equal button
                 items(elementList.filter { it != "=" }) { symbol ->
                     CalculatorButton(symbol, onClick = {
-                        viewMode.onButtonClick(symbol)
+//
+                        // Convert display symbols to calculation symbols when needed
+                        val buttonValue = when (symbol) {
+                            displayMultiply -> calculateMultiply  // "X" -> "*"
+                            displayDivide -> calculateDivide      // "÷" -> "/"
+                            else -> symbol
+                        }
+                        viewMode.onButtonClick(buttonValue)
                     })
                 }
 
@@ -144,7 +162,7 @@ fun CalculatorButton(symbol: String, onClick :()-> Unit) {
                 Text(
                     symbol,
                     color = Color.Red,
-                    fontSize = 28.sp,
+                    fontSize = 30.sp,
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -155,14 +173,15 @@ fun CalculatorButton(symbol: String, onClick :()-> Unit) {
                 onClick = onClick,
                 containerColor = Color.White,
                 contentColor = colorResource(R.color.Blue),
-                modifier = modifier
+                modifier = modifier,
             ) {
-                Text(symbol, color = colorResource(R.color.Light_blue), fontSize = 28.sp
+                Text(symbol, color = colorResource(R.color.Light_blue),
+                    fontSize = 32.sp
                 , fontWeight = FontWeight.Bold)
             }
         }
 
-        "%", "/", "X","(",")"-> {
+         "%","X"-> {
             FloatingActionButton (
                 onClick = onClick,
                 containerColor = Color.White,
@@ -171,8 +190,23 @@ fun CalculatorButton(symbol: String, onClick :()-> Unit) {
             ) {
                 Text(
                     symbol, color = colorResource(R.color.Light_blue),
-                    fontSize = 30.sp,
-                    fontWeight = FontWeight.ExtraBold
+                    fontSize = 32.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
+
+        "÷" ->{
+            FloatingActionButton (
+                onClick = onClick,
+                containerColor = Color.White,
+                contentColor = colorResource(R.color.Blue),
+                modifier = modifier
+            ) {
+                Text(
+                    symbol, color = colorResource(R.color.Light_blue),
+                    fontSize = 45.sp,
+                    fontWeight = FontWeight.Bold
                 )
             }
         }
@@ -187,7 +221,7 @@ fun CalculatorButton(symbol: String, onClick :()-> Unit) {
                 Text(
                     symbol, color = colorResource(R.color.Light_blue),
                     fontSize = 60.sp,
-                    fontWeight = FontWeight.ExtraBold
+                    fontWeight = FontWeight.Medium
                 )
             }
         }
@@ -202,7 +236,7 @@ fun CalculatorButton(symbol: String, onClick :()-> Unit) {
                 Text(
                     symbol, color = colorResource(R.color.Light_blue),
                     fontSize = 40.sp,
-                    fontWeight = FontWeight.ExtraBold
+                    fontWeight = FontWeight.Medium
                 )
             }
         }

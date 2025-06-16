@@ -1,25 +1,23 @@
 package com.example.calculator.Screen.HomeScreen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.calculator.Harder.TopBarHarder
+import androidx.navigation.NavHostController
+import com.example.calculator.Navigation.CalRoutes
 import com.example.calculator.VCard
 import com.example.calculator.R
 
-@Preview(showSystemUi = true)
 @Composable
 // more(home screen )
-fun HomeScreen()
+fun HomeScreen(NavController: NavHostController)
 {
 
     Column {
@@ -28,16 +26,32 @@ fun HomeScreen()
         Spacer(modifier = Modifier.height(20.dp))
 
         Row {
-            VCard(painterResource(R.drawable.logo),"Area",)
+            VCard(painterResource(R.drawable.logo),"Area", onClick = {
+                NavController.navigate(route = CalRoutes.AreaListScreen.name)
+            })
+
 
             Spacer(modifier = Modifier.width(10.dp))
 
-            VCard(painterResource(R.drawable.logo),"Area",)
+            VCard(painterResource(R.drawable.logo),"Volume",onClick = {
+                NavController.navigate(route = CalRoutes.VolumeListScreen.name)
+            })
         }
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        VCard(painterResource(R.drawable.logo),"Space",)
+        Row {
+            VCard(painterResource(R.drawable.logo),"Formula", onClick = {
+                NavController.navigate(route = CalRoutes.AreaListScreen.name)
+            })
+
+
+            Spacer(modifier = Modifier.width(10.dp))
+
+            VCard(painterResource(R.drawable.logo),"Tip Calculator",onClick = {
+                NavController.navigate(route = CalRoutes.TipCalculator.name)
+            })
+        }
 
     }
 

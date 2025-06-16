@@ -64,4 +64,9 @@ dependencies {
 
     // mozilla (calculation part)
     implementation("org.mozilla:rhino:1.7R4")
+
+    // Navigation
+    val nav_version = "2.9.0"
+// Jetpack Compose integration
+    implementation("androidx.navigation:navigation-compose:$nav_version")
 }

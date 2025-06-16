@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import org.mozilla.javascript.Context
 import org.mozilla.javascript.Scriptable
 
-class CalculatorViewMode : ViewModel() {
+class CalculatorViewModel : ViewModel() {
 
     private val _equationtext = MutableLiveData("")
     val equationText : LiveData<String> = _equationtext
