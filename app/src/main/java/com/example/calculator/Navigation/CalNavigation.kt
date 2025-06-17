@@ -1,9 +1,12 @@
 package com.example.calculator.Navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.calculator.Screen.AreaScreen.AreaCalScreen
 import com.example.calculator.Screen.AreaScreen.AreaListScreen
 import com.example.calculator.Screen.CalulatorScreen.NormalCalculatorScreen
 import com.example.calculator.Screen.Formula.FormulaListScreen
@@ -56,6 +59,18 @@ fun CalNavigation() {
         // Tip Calculator
         composable (CalRoutes.TipCalculator.name){
             TipMainContent(NavController)
+        }
+        // AreaCal Screen
+//        composable(CalRoutes.AreaCalScreen.name) {
+//            AreaCalScreen(NavController)
+//        }
+
+        composable(
+            route = "${CalRoutes.AreaCalScreen.name}/{shapeType}",
+            arguments = listOf(navArgument("shapeType") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val shapeType = backStackEntry.arguments?.getString("shapeType") ?: "Circle"
+            AreaCalScreen(NavController, shapeType)
         }
     }
 }

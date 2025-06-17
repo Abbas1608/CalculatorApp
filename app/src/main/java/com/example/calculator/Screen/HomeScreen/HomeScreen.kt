@@ -1,12 +1,13 @@
 package com.example.calculator.Screen.HomeScreen
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -20,8 +21,12 @@ import com.example.calculator.R
 fun HomeScreen(NavController: NavHostController)
 {
 
-    Column {
-        HomeTopBar()
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxSize()
+    ) {
+
+        HomeTopBar(NavController)
 
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -42,7 +47,7 @@ fun HomeScreen(NavController: NavHostController)
 
         Row {
             VCard(painterResource(R.drawable.logo),"Formula", onClick = {
-                NavController.navigate(route = CalRoutes.AreaListScreen.name)
+                NavController.navigate(route = CalRoutes.FormulaScreen.name)
             })
 
 

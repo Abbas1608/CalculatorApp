@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 
-@Preview(showSystemUi = true)
+
 @Composable
 fun FormulaListScreen(NavController: NavHostController)
 {

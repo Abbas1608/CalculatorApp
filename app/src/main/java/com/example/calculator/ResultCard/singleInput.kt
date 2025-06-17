@@ -1,6 +1,7 @@
 package com.example.calculator.ResultCard
 
 import android.text.InputFilter
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -74,7 +75,6 @@ fun InputButton(
 
 }
 
-
 @Composable
 fun singleInput(Image: Painter,
                 Text: String,
@@ -86,18 +86,19 @@ fun singleInput(Image: Painter,
         mutableStateOf("")
     }
 
-    // checkiing is emtpy a not and trim the space around amount
+    // FIXED: Added null safety and proper validation
     val ValidState = remember(TextState.value) {
-        TextState.value.trim().isNotEmpty()
+        TextState.value.trim().isNotEmpty() &&
+                TextState.value.trim().toFloatOrNull() != null // Check if it's a valid number
     }
     val keyboardController = LocalSoftwareKeyboardController.current
 
+    val resultState = remember { mutableStateOf(0.0) }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
-            .padding(top = 20.dp
-            )
+            .padding(top = 20.dp)
     )
     {
         Image(
@@ -119,29 +120,31 @@ fun singleInput(Image: Painter,
             color = colorResource(R.color.Dark_Blue))
         Spacer(modifier = Modifier.height(20.dp))
 
-
-        var InputText= InputButton(
+        InputButton(
             valueState = TextState,
             labelId = labelText,
             isSingleLine = true,
             enabled = true,
             onActions = KeyboardActions {
                 if (!ValidState) return@KeyboardActions
-                // on validState : use to get value that user enter in app in our logcat(upper calling )
                 onValChange(TextState.value.trim())
                 keyboardController?.hide()
             })
 
-//        var Result = 0.0
-//        when(Text){
-//            "Cricle" -> {Result = 3.14 * InputText. }
-//
-//        }
-
-
         Spacer(modifier = Modifier.height(20.dp))
 
-        FloatingActionButton( onClick = {},
+        // FIXED: Added null safety and moved calculation inside the button click
+        FloatingActionButton( onClick = {
+            if (ValidState) {
+                // Convert to Float safely
+                val userInput = TextState.value.trim().toFloatOrNull()
+                if (userInput != null && userInput > 0) { // Added positive number check
+                    val result = resultcal(Text, userInput)
+                    resultState.value = result
+                    Log.d("resultcal", "Shape: $Text, Input: $userInput, Result: $result")
+                }
+            }
+        },
             modifier = Modifier.size(width = 250.dp, height = 45.dp),
             containerColor = colorResource(R.color.Dark_Blue),
             contentColor = Color.White,
@@ -150,18 +153,32 @@ fun singleInput(Image: Painter,
             Text(text = "Calculate $Text")
         }
 
-
         Spacer(modifier = Modifier.height(30.dp))
 
-        Text(text = "Answer =  345.9",
-            fontSize = 25.sp,
-            fontWeight = FontWeight.Bold,
-            color = colorResource(R.color.Dark_Blue))
-        Spacer(modifier = Modifier.height(3.dp))
-        Text(text = "Unit.",
-            fontSize = 23.sp,
-            fontWeight = FontWeight.Bold,
-            color = colorResource(R.color.Dark_Blue))
+        // Display result
+        if (resultState.value > 0){
+            Text(text = "Answer = ${String.format("%.2f", resultState.value)}", // FIXED: Format decimal places
+                fontSize = 25.sp,
+                fontWeight = FontWeight.Bold,
+                color = colorResource(R.color.Dark_Blue))
+            Spacer(modifier = Modifier.height(3.dp))
+            Text(text = "Square Units", // FIXED: More descriptive unit
+                fontSize = 23.sp,
+                fontWeight = FontWeight.Bold,
+                color = colorResource(R.color.Dark_Blue))
+        }
+    }
+}
 
+// IMPROVED CALCULATION FUNCTION:
+fun resultcal(typeofshape: String, value: Float): Double {
+    return when(typeofshape) {
+        "Circle" -> {
+            Math.PI * value * value
+        }
+        "Square" -> {
+            (value * value).toDouble()
+        }
+        else -> 0.0
     }
 }

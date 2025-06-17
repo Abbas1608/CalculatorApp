@@ -20,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -44,13 +43,15 @@ fun TopBarHarder(NavController: NavHostController)
 
         Row{
 
-            Column {
+            Column(
+            ) {
                 Text(text = "Calculator",
                     fontWeight = FontWeight.Bold,
                     fontSize = 26.sp,
                     color = colorResource(R.color.Dark_Blue),
-                    modifier = Modifier.padding(start = 40.dp, top = 20.dp)
+                    modifier = Modifier
                         .align (alignment = Alignment.CenterHorizontally)
+                        .padding(start = 40.dp, top = 20.dp)
                 )
                 HorizontalDivider(modifier = Modifier.width(50.dp)
                     .padding(start = 6.dp)

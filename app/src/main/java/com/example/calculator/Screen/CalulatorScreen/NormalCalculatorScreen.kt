@@ -31,10 +31,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.draw.BlurredEdgeTreatment.Companion.Rectangle
-import androidx.compose.ui.graphics.Outline
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.calculator.ui.theme.HCardBrush
@@ -70,12 +67,6 @@ fun Calculator(viewMode: CalculatorViewModel) {
         "4", "5", "6", "-",
         "1", "2", "3", "+",
         ".", "0", "="
-
-//        "AC", "⌫", "(", ")",
-//        "7", "8", "9", "X",
-//        "4", "5", "6", "-",
-//        "1", "2", "3", "+",
-//        ".", "0", "%","/"
     )
         Column(
             horizontalAlignment = Alignment.End,
@@ -162,7 +153,7 @@ fun CalculatorButton(symbol: String, onClick :()-> Unit) {
                 Text(
                     symbol,
                     color = Color.Red,
-                    fontSize = 30.sp,
+                    fontSize = 26.sp,
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -176,7 +167,7 @@ fun CalculatorButton(symbol: String, onClick :()-> Unit) {
                 modifier = modifier,
             ) {
                 Text(symbol, color = colorResource(R.color.Light_blue),
-                    fontSize = 32.sp
+                    fontSize = 26.sp
                 , fontWeight = FontWeight.Bold)
             }
         }
@@ -190,7 +181,7 @@ fun CalculatorButton(symbol: String, onClick :()-> Unit) {
             ) {
                 Text(
                     symbol, color = colorResource(R.color.Light_blue),
-                    fontSize = 32.sp,
+                    fontSize = 26.sp,
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -205,7 +196,7 @@ fun CalculatorButton(symbol: String, onClick :()-> Unit) {
             ) {
                 Text(
                     symbol, color = colorResource(R.color.Light_blue),
-                    fontSize = 45.sp,
+                    fontSize = 38.sp,
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -220,7 +211,7 @@ fun CalculatorButton(symbol: String, onClick :()-> Unit) {
             ) {
                 Text(
                     symbol, color = colorResource(R.color.Light_blue),
-                    fontSize = 60.sp,
+                    fontSize = 50.sp,
                     fontWeight = FontWeight.Medium
                 )
             }

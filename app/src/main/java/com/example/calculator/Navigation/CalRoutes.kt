@@ -1,7 +1,14 @@
 package com.example.calculator.Navigation
 
+import androidx.compose.ui.graphics.painter.Painter
 import com.example.calculator.Screen.AreaScreen.AreaListScreen
 import com.example.calculator.Screen.CalulatorScreen.NormalCalculatorScreen
+
+data class ShapeData(
+    val image: Painter,
+    val formula: String,
+    val labelText: String
+)
 
 enum class CalRoutes {
 
@@ -11,7 +18,8 @@ enum class CalRoutes {
     AreaListScreen,
     VolumeListScreen,
     FormulaScreen,
-    TipCalculator;
+    TipCalculator,
+    AreaCalScreen;
     companion object{
         fun fromRoutes(routes: String?): CalRoutes
         = when(routes?.substringBefore("/"))
@@ -23,6 +31,7 @@ enum class CalRoutes {
             VolumeListScreen.name -> VolumeListScreen
             FormulaScreen.name -> FormulaScreen
             TipCalculator.name -> TipCalculator
+            AreaCalScreen.name -> AreaCalScreen
             null -> NormalCalculatorScreen
             else ->throw IllegalArgumentException("Routes unExcepted")
         }
