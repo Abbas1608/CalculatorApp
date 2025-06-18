@@ -30,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.input.pointer.util.VelocityTrackerAddPointsFix
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -207,6 +208,15 @@ fun resultcal(typeofshape: String, value: Float): Double {
         }
         "Square" -> {
             (value * value).toDouble()
+        }
+        "Cube" ->{
+            (value*value*value).toDouble()
+        }
+        "Sphere" ->{
+            (1.33 * Math.PI * (value*value*value))
+        }
+        "Tetrahedron" -> {
+            ( (value* value*value) / 8.485 )
         }
         else -> 0.0
     }

@@ -190,12 +190,16 @@ fun TwoInput(
 
 fun resultcal2(typeofshape: String, value1: Float,value2: Float): Double {
     return when(typeofshape) {
-        "Triangle" -> {
+        "Triangle" ,"Triangle_Prism" ,"Rectangle" -> {
             (value1 * value2).toDouble()
         }
-        "Rectangle" -> {
-            (value1 * value2).toDouble()
+        "Cone" ->{
+            (0.33 * Math.PI * (value1*value1) *value2).toDouble()
         }
+        "Cylinder" ->{
+            (Math.PI * (value1*value1) * value2)
+        }
+
         else -> 0.0
     }
 }

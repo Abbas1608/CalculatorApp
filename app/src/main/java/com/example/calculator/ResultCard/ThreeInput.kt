@@ -206,10 +206,13 @@ fun ThreeInput(
 }
 
 fun resultcal3(typeofshape: String, value1: Float,value2: Float, value3: Float): Double {
-//    return when(typeofshape) {
-//        "Trapezoid" -> {
-           return ((0.5 * (value1+value2) * value3).toDouble())
-//        }
-//        else -> 0.0
-//    }
+    return when(typeofshape) {
+        "Trapezoid" -> {
+            ((0.5 * (value1+value2) * value3).toDouble())
+        }
+        "Cuboid" -> {
+            (value1*value2*value3).toDouble()
+        }
+        else -> 0.0
+    }
 }

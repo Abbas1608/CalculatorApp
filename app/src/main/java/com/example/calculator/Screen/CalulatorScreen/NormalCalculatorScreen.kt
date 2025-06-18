@@ -61,7 +61,6 @@ fun Calculator(viewMode: CalculatorViewModel) {
 
 
     val elementList = listOf<String>(
-
         "AC", "⌫", "%", displayDivide,
         "7", "8", "9", displayMultiply,
         "4", "5", "6", "-",
@@ -88,7 +87,7 @@ fun Calculator(viewMode: CalculatorViewModel) {
 
             Text(
                 text = resultText.value?:"0",
-                fontSize = 60.sp,
+                fontSize = 45.sp,
                 style = TextStyle(
                     textAlign = TextAlign.End,
                     color = colorResource(R.color.Dark_Blue)
