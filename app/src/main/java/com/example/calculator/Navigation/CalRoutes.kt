@@ -4,12 +4,6 @@ import androidx.compose.ui.graphics.painter.Painter
 import com.example.calculator.Screen.AreaScreen.AreaListScreen
 import com.example.calculator.Screen.CalulatorScreen.NormalCalculatorScreen
 
-data class ShapeData(
-    val image: Painter,
-    val formula: String,
-    val labelText: String
-)
-
 enum class CalRoutes {
 
     SplitScreen,

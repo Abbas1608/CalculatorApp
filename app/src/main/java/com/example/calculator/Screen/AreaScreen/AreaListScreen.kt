@@ -17,7 +17,7 @@ fun AreaListScreen(NavController: NavHostController) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        AreaTopBar()
+        AreaTopBar(NavController)
 
         LazyColumn {
             item {

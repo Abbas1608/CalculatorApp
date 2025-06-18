@@ -1,6 +1,5 @@
 package com.example.calculator.ResultCard
 
-import android.text.InputFilter
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -13,15 +12,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.AttachMoney
 import androidx.compose.material.icons.rounded.Calculate
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -32,66 +28,40 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.calculator.R
-import com.example.calculator.Screen.TipCal.InputField
 
 
 @Composable
-fun InputButton(
-    modifier: Modifier = Modifier,
-    valueState : MutableState<String>,
-    labelId : String,
-    enabled : Boolean,
-    isSingleLine : Boolean,
-    isError: Boolean = false,
-    KeyBoardType : KeyboardType = KeyboardType.Number,
-    imwAction: ImeAction = ImeAction.Next, // using next icon in keyboard
-    onActions: KeyboardActions = KeyboardActions.Default
-)
-{
-    OutlinedTextField(
-        value = valueState.value,
-        onValueChange = {valueState.value = it},
-        label = { Text(text = labelId) },
-        leadingIcon = { Icon(imageVector = Icons.Rounded.Calculate,
-            contentDescription = " icon") },
-        singleLine = isSingleLine,
-        modifier = Modifier.padding(start = 30.dp, end = 30.dp, bottom = 10.dp)
-            .fillMaxWidth(),
-        textStyle = TextStyle(fontSize = 18.sp,
-            color = colorResource(R.color.Dark_Blue)),
-        enabled = enabled,
-        isError = isError,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyBoardType,
-            imeAction = imwAction),
-        keyboardActions = onActions
-    )
-
-}
-
-@Composable
-fun singleInput(Image: Painter,
-                Text: String,
-                formula : String,
-                labelText: String,
-                onValChange:(String ) -> Unit= {}){
-
-    val TextState = remember {
+fun TwoInput(
+    Image: Painter,
+    Text: String,
+    formula : String,
+    labelText1: String,
+    labelText2: String,
+    onValChange:(String ) -> Unit= {}
+){
+    val TextState1 = remember {
+        mutableStateOf("")
+    }
+    val TextState2 = remember {
         mutableStateOf("")
     }
 
     // FIXED: Added null safety and proper validation
-    val ValidState = remember(TextState.value) {
-        TextState.value.trim().isNotEmpty() &&
-                TextState.value.trim().toFloatOrNull() != null // Check if it's a valid number
+    val ValidState1 = remember(TextState1.value) {
+        TextState1.value.trim().isNotEmpty() &&
+                TextState1.value.trim().toFloatOrNull() != null // Check if it's a valid number
+    }
+
+    val ValidState2 = remember(TextState2.value) {
+        TextState2.value.trim().isNotEmpty() &&
+                TextState2.value.trim().toFloatOrNull() != null // Check if it's a valid number
     }
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -123,13 +93,26 @@ fun singleInput(Image: Painter,
         Spacer(modifier = Modifier.height(20.dp))
 
         InputButton(
-            valueState = TextState,
-            labelId = labelText,
+            valueState = TextState1,
+            labelId = labelText1,
             isSingleLine = true,
             enabled = true,
             onActions = KeyboardActions {
-                if (!ValidState) return@KeyboardActions
-                onValChange(TextState.value.trim())
+                if (!ValidState1) return@KeyboardActions
+                onValChange(TextState1.value.trim())
+                keyboardController?.hide()
+            })
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        InputButton(
+            valueState = TextState2,
+            labelId = labelText2,
+            isSingleLine = true,
+            enabled = true,
+            onActions = KeyboardActions {
+                if (!ValidState2) return@KeyboardActions
+                onValChange(TextState2.value.trim())
                 keyboardController?.hide()
             })
 
@@ -137,14 +120,17 @@ fun singleInput(Image: Painter,
 
         // FIXED: Added null safety and moved calculation inside the button click
         FloatingActionButton( onClick = {
-            if (ValidState) {
+            if (ValidState1) {
                 // Convert to Float safely
-                val userInput = TextState.value.trim().toFloatOrNull()
-                if (userInput != null && userInput > 0) { // Added positive number check
-                    val result = resultcal(Text, userInput)
+                val userInput1 = TextState1.value.trim().toFloatOrNull()
+                val userInput2 = TextState2.value.trim().toFloatOrNull()
+
+                if ( (userInput1 != null && userInput1 > 0) && (userInput2 != null && userInput2 > 0)) { // Added positive number check
+                    val result = resultcal2(Text, userInput1,userInput2)
                     resultState.value = result
-                    Log.d("resultcal", "Shape: $Text, Input: $userInput, Result: $result")
+                    Log.d("resultcal", "Shape: $Text, Input: $userInput1, Result: $result")
                 }
+
             }
         },
             modifier = Modifier.size(width = 250.dp, height = 45.dp),
@@ -170,16 +156,16 @@ fun singleInput(Image: Painter,
                 color = colorResource(R.color.Dark_Blue))
         }
     }
+
 }
 
-// IMPROVED CALCULATION FUNCTION:
-fun resultcal(typeofshape: String, value: Float): Double {
+fun resultcal2(typeofshape: String, value1: Float,value2: Float): Double {
     return when(typeofshape) {
-        "Circle" -> {
-            Math.PI * value * value
+        "Triangle" -> {
+            (value1 * value2).toDouble()
         }
-        "Square" -> {
-            (value * value).toDouble()
+        "Rectangle" -> {
+            (value1 * value2).toDouble()
         }
         else -> 0.0
     }

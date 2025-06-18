@@ -1,4 +1,4 @@
-package com.example.calculator.Screen.Formula
+package com.example.calculator.Screen.AreaScreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,7 +27,7 @@ import com.example.calculator.R
 import com.example.calculator.ui.theme.HCardBrush
 
 @Composable
-fun FormulaTopBar(NavController: NavHostController)
+fun AreaCalTopBAr(NavController: NavHostController)
 {
     Box(
         modifier = Modifier
@@ -48,12 +48,12 @@ fun FormulaTopBar(NavController: NavHostController)
                 contentDescription = null,
                 modifier = Modifier.size(35.dp)
                     .clickable(onClick = {
-                        NavController.navigate(CalRoutes.HomeScreen.name)
+                        NavController.navigate(CalRoutes.AreaListScreen.name)
                     }),
                 tint = colorResource(R.color.Dark_Blue))
 
             Spacer(modifier = Modifier.width(10.dp))
-            Text(text = "Formula List",
+            Text(text = "Area Calculator ",
                 fontWeight = FontWeight.Bold,
                 fontSize = 26.sp,
                 color = colorResource(R.color.Dark_Blue),
@@ -61,5 +61,8 @@ fun FormulaTopBar(NavController: NavHostController)
                 )
 
         }
+
+
     }
+
 }

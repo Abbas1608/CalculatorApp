@@ -33,7 +33,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -77,7 +76,7 @@ fun TopHarder(TotalPrePerson : Double )
 @Composable
 fun TipMainContent(NavController: NavHostController) {
     Column {
-        TipTopBar()
+        TipTopBar(NavController)
 
         BillFrom() { billAmt ->
             Log.d("AMT", "MainContent $billAmt") // tag : logcat name that value is store enter by user

@@ -6,7 +6,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import com.example.calculator.R
 import com.example.calculator.VCard
@@ -17,7 +16,7 @@ fun VolumeListScreen(NavController: NavHostController)
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        VolumeTopBar()
+        VolumeTopBar(NavController)
 
         LazyColumn {
             item {
