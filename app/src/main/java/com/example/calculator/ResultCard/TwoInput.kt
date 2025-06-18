@@ -41,6 +41,7 @@ import com.example.calculator.R
 fun TwoInput(
     Image: Painter,
     Text: String,
+    Typetext: String,
     formula : String,
     labelText1: String,
     labelText2: String,
@@ -80,18 +81,25 @@ fun TwoInput(
             contentDescription = null,
             modifier = Modifier.size(200.dp)
         )
-        Spacer(modifier = Modifier.height(20.dp))
-        Text(text = "Formula",
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(text = "Formula:",
             fontSize = 20.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = colorResource(R.color.Dark_Blue))
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(text = Typetext ,
+            fontSize = 22.sp,
             fontWeight = FontWeight.SemiBold,
             color = colorResource(R.color.Dark_Blue))
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        Text(text = formula,
-            fontSize = 25.sp,
+        Text(text = "= $formula",
+            fontSize = 22.sp,
             fontWeight = FontWeight.Bold,
             color = colorResource(R.color.Dark_Blue))
+
         Spacer(modifier = Modifier.height(20.dp))
 
         InputButton(
@@ -198,6 +206,12 @@ fun resultcal2(typeofshape: String, value1: Float,value2: Float): Double {
         }
         "Cylinder" ->{
             (Math.PI * (value1*value1) * value2)
+        }
+        "Ellipse"->{
+            (Math.PI * value1 * value2)
+        }
+        "Rhombus" -> {
+            (0.5 * value1 * value2)
         }
 
         else -> 0.0

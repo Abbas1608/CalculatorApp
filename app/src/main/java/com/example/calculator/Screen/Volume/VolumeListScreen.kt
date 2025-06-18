@@ -49,11 +49,20 @@ fun VolumeListScreen(NavController: NavHostController)
                         })
                 }
 
-                VCard(
-                    painterResource(R.drawable.triangle_prism),"Tetrahedron",
-                    onClick = {
-                        NavController.navigate("${CalRoutes.VolumeCalScreen.name}/Tetrahedron")
-                    })
+                Row {
+                    VCard(
+                        painterResource(R.drawable.triangle_prism),"Tetrahedron",
+                        onClick = {
+                            NavController.navigate("${CalRoutes.VolumeCalScreen.name}/Tetrahedron")
+                        })
+
+                    VCard(
+                        painterResource(R.drawable.ellipse),"Ellipsoid",
+                        onClick = {
+                            NavController.navigate("${CalRoutes.VolumeCalScreen.name}/Ellipsoid")
+                        })
+                }
+
 
 
             }

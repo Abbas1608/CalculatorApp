@@ -61,6 +61,7 @@ fun Calculator(viewMode: CalculatorViewModel) {
 
 
     val elementList = listOf<String>(
+
         "AC", "⌫", "%", displayDivide,
         "7", "8", "9", displayMultiply,
         "4", "5", "6", "-",
@@ -72,7 +73,7 @@ fun Calculator(viewMode: CalculatorViewModel) {
             modifier = Modifier.fillMaxSize()
         ) {
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(30.dp))
             Text(
                 text =equationText.value?:"",
                 fontSize = 30.sp,

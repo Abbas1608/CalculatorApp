@@ -53,7 +53,7 @@ fun VolumeCalTopBar(NavController: NavHostController)
                 tint = colorResource(R.color.Dark_Blue))
 
             Spacer(modifier = Modifier.width(10.dp))
-            Text(text = "Area Calculator ",
+            Text(text = "Volume Calculator ",
                 fontWeight = FontWeight.Bold,
                 fontSize = 26.sp,
                 color = colorResource(R.color.Dark_Blue),

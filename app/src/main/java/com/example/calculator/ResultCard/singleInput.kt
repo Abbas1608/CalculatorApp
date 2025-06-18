@@ -81,6 +81,7 @@ fun InputButton(
 @Composable
 fun singleInput(Image: Painter,
                 Text: String,
+                Typetext: String,
                 formula : String,
                 labelText: String,
                 onValChange:(String ) -> Unit= {}){
@@ -113,14 +114,20 @@ fun singleInput(Image: Painter,
             modifier = Modifier.size(200.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
-        Text(text = "Formula",
+        Text(text = "Formula:",
             fontSize = 20.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = colorResource(R.color.Dark_Blue))
+
+        Spacer(modifier = Modifier.height(12.dp))
+        Text(text = Typetext ,
+            fontSize = 22.sp,
             fontWeight = FontWeight.SemiBold,
             color = colorResource(R.color.Dark_Blue))
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        Text(text = formula,
+        Text(text = "= $formula",
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold,
             color = colorResource(R.color.Dark_Blue))

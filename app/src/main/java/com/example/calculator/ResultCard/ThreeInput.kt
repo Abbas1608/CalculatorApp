@@ -30,6 +30,7 @@ import com.example.calculator.R
 fun ThreeInput(
     Image: Painter,
     Text: String,
+    Typetext: String,
     formula : String,
     labelText1: String,
     labelText2: String,
@@ -83,18 +84,24 @@ fun ThreeInput(
             modifier = Modifier.size(200.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
-        Text(text = "Formula",
+        Text(text = "Formula:",
             fontSize = 20.sp,
             fontWeight = FontWeight.SemiBold,
             color = colorResource(R.color.Dark_Blue))
 
         Spacer(modifier = Modifier.height(10.dp))
+        Text(text = Typetext ,
+            fontSize = 22.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = colorResource(R.color.Dark_Blue))
 
-        Text(text = formula,
-            fontSize = 25.sp,
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Text(text = "= $formula",
+            fontSize = 22.sp,
             fontWeight = FontWeight.Bold,
             color = colorResource(R.color.Dark_Blue))
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(15.dp))
 
         InputButton(
             valueState = TextState1,
@@ -109,7 +116,7 @@ fun ThreeInput(
                 showError.value = false
             })
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(15.dp))
 
         InputButton(
             valueState = TextState2,
@@ -124,7 +131,7 @@ fun ThreeInput(
                 showError.value = false
             })
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(15.dp))
 
         InputButton(
             valueState = TextState3,
@@ -139,7 +146,7 @@ fun ThreeInput(
                 showError.value = false
             })
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(15.dp))
 
 
         FloatingActionButton( onClick = {
@@ -176,7 +183,7 @@ fun ThreeInput(
             Text(text = "Calculate $Text")
         }
 
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         // Show error message if validation fails
         if (showError.value) {
@@ -212,6 +219,9 @@ fun resultcal3(typeofshape: String, value1: Float,value2: Float, value3: Float):
         }
         "Cuboid" -> {
             (value1*value2*value3).toDouble()
+        }
+        "Ellipsoid" ->{
+            (1.33 * Math.PI *(value1*value2*value3))
         }
         else -> 0.0
     }
