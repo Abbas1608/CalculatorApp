@@ -66,6 +66,8 @@ fun TwoInput(
     val keyboardController = LocalSoftwareKeyboardController.current
 
     val resultState = remember { mutableStateOf(0.0) }
+    val showError = remember { mutableStateOf(false) }
+    val errorMessage = remember { mutableStateOf("") }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -97,10 +99,12 @@ fun TwoInput(
             labelId = labelText1,
             isSingleLine = true,
             enabled = true,
+            isError = showError.value && !ValidState1,
             onActions = KeyboardActions {
                 if (!ValidState1) return@KeyboardActions
                 onValChange(TextState1.value.trim())
                 keyboardController?.hide()
+                showError.value = false
             })
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -110,10 +114,12 @@ fun TwoInput(
             labelId = labelText2,
             isSingleLine = true,
             enabled = true,
+            isError = showError.value && !ValidState2,
             onActions = KeyboardActions {
                 if (!ValidState2) return@KeyboardActions
                 onValChange(TextState2.value.trim())
                 keyboardController?.hide()
+                showError.value = false
             })
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -128,7 +134,18 @@ fun TwoInput(
                 if ( (userInput1 != null && userInput1 > 0) && (userInput2 != null && userInput2 > 0)) { // Added positive number check
                     val result = resultcal2(Text, userInput1,userInput2)
                     resultState.value = result
+                    showError.value = false
                     Log.d("resultcal", "Shape: $Text, Input: $userInput1, Result: $result")
+                }
+                else {
+                    // Show error message when validation fails
+                    showError.value = true
+                    val missingFields = mutableListOf<String>()
+
+                    if (!ValidState1) missingFields.add(labelText1)
+                    if (!ValidState2) missingFields.add(labelText2)
+
+                    errorMessage.value = "Please enter valid values for: ${missingFields.joinToString(", ")}"
                 }
 
             }
@@ -143,14 +160,26 @@ fun TwoInput(
 
         Spacer(modifier = Modifier.height(30.dp))
 
+        // Show error message if validation fails
+        if (showError.value) {
+            Text(
+                text = errorMessage.value,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color.Red,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+        }
+
         // Display result
         if (resultState.value > 0){
-            Text(text = "Answer = ${String.format("%.2f", resultState.value)}", // FIXED: Format decimal places
+            Text(text = "Answer = ${String.format("%.2f", resultState.value)}",
                 fontSize = 25.sp,
                 fontWeight = FontWeight.Bold,
                 color = colorResource(R.color.Dark_Blue))
             Spacer(modifier = Modifier.height(3.dp))
-            Text(text = "Square Units", // FIXED: More descriptive unit
+            Text(text = "Square Units",
                 fontSize = 23.sp,
                 fontWeight = FontWeight.Bold,
                 color = colorResource(R.color.Dark_Blue))

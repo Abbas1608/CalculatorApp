@@ -47,7 +47,7 @@ fun ThreeInput(
         mutableStateOf("")
     }
 
-    // FIXED: Corrected ValidState3 to use TextState3
+
     val ValidState1 = remember(TextState1.value) {
         TextState1.value.trim().isNotEmpty() &&
                 TextState1.value.trim().toFloatOrNull() != null
@@ -58,8 +58,8 @@ fun ThreeInput(
                 TextState2.value.trim().toFloatOrNull() != null
     }
 
-    val ValidState3 = remember(TextState3.value) { // ✅ Fixed: Use TextState3.value
-        TextState3.value.trim().isNotEmpty() &&    // ✅ Fixed: Use TextState3.value
+    val ValidState3 = remember(TextState3.value) {
+        TextState3.value.trim().isNotEmpty() &&
                 TextState3.value.trim().toFloatOrNull() != null
     }
 
@@ -101,12 +101,12 @@ fun ThreeInput(
             labelId = labelText1,
             isSingleLine = true,
             enabled = true,
-            isError = showError.value && !ValidState1, // Show error styling if validation fails
+            isError = showError.value && !ValidState1,
             onActions = KeyboardActions {
                 if (!ValidState1) return@KeyboardActions
                 onValChange(TextState1.value.trim())
                 keyboardController?.hide()
-                showError.value = false // Clear error when user starts typing
+                showError.value = false
             })
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -116,12 +116,12 @@ fun ThreeInput(
             labelId = labelText2,
             isSingleLine = true,
             enabled = true,
-            isError = showError.value && !ValidState2, // Show error styling if validation fails
+            isError = showError.value && !ValidState2,
             onActions = KeyboardActions {
                 if (!ValidState2) return@KeyboardActions
                 onValChange(TextState2.value.trim())
                 keyboardController?.hide()
-                showError.value = false // Clear error when user starts typing
+                showError.value = false
             })
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -131,19 +131,19 @@ fun ThreeInput(
             labelId = labelText3,
             isSingleLine = true,
             enabled = true,
-            isError = showError.value && !ValidState3, // Show error styling if validation fails
+            isError = showError.value && !ValidState3,
             onActions = KeyboardActions {
                 if (!ValidState3) return@KeyboardActions
                 onValChange(TextState3.value.trim())
                 keyboardController?.hide()
-                showError.value = false // Clear error when user starts typing
+                showError.value = false
             })
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        // FIXED: Check all three validation states
+
         FloatingActionButton( onClick = {
-            if (ValidState1 && ValidState2 && ValidState3) { // ✅ Fixed: Check all three states
+            if (ValidState1 && ValidState2 && ValidState3) {
                 val userInput1 = TextState1.value.trim().toFloatOrNull()
                 val userInput2 = TextState2.value.trim().toFloatOrNull()
                 val userInput3 = TextState3.value.trim().toFloatOrNull()

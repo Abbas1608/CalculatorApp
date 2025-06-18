@@ -88,14 +88,17 @@ fun singleInput(Image: Painter,
         mutableStateOf("")
     }
 
-    // FIXED: Added null safety and proper validation
+
     val ValidState = remember(TextState.value) {
         TextState.value.trim().isNotEmpty() &&
-                TextState.value.trim().toFloatOrNull() != null // Check if it's a valid number
+                TextState.value.trim().toFloatOrNull() != null
     }
     val keyboardController = LocalSoftwareKeyboardController.current
 
     val resultState = remember { mutableStateOf(0.0) }
+
+    val showError = remember { mutableStateOf(false) }
+    val errorMessage = remember { mutableStateOf("") }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -127,23 +130,35 @@ fun singleInput(Image: Painter,
             labelId = labelText,
             isSingleLine = true,
             enabled = true,
+            isError = showError.value && !ValidState,
             onActions = KeyboardActions {
                 if (!ValidState) return@KeyboardActions
                 onValChange(TextState.value.trim())
                 keyboardController?.hide()
+                showError.value = false
             })
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        // FIXED: Added null safety and moved calculation inside the button click
+
         FloatingActionButton( onClick = {
             if (ValidState) {
                 // Convert to Float safely
                 val userInput = TextState.value.trim().toFloatOrNull()
-                if (userInput != null && userInput > 0) { // Added positive number check
+                if (userInput != null && userInput > 0) {
                     val result = resultcal(Text, userInput)
                     resultState.value = result
+                    showError.value = false
                     Log.d("resultcal", "Shape: $Text, Input: $userInput, Result: $result")
+                }
+                else {
+                    // Show error message when validation fails
+                    showError.value = true
+                    val missingFields = mutableListOf<String>()
+
+                     missingFields.add(labelText)
+
+                    errorMessage.value = "Please enter valid values for: ${missingFields.joinToString(", ")}"
                 }
             }
         },
@@ -157,14 +172,26 @@ fun singleInput(Image: Painter,
 
         Spacer(modifier = Modifier.height(30.dp))
 
+        // Show error message if validation fails
+        if (showError.value) {
+            Text(
+                text = errorMessage.value,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color.Red,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+        }
+
         // Display result
         if (resultState.value > 0){
-            Text(text = "Answer = ${String.format("%.2f", resultState.value)}", // FIXED: Format decimal places
+            Text(text = "Answer = ${String.format("%.2f", resultState.value)}",
                 fontSize = 25.sp,
                 fontWeight = FontWeight.Bold,
                 color = colorResource(R.color.Dark_Blue))
             Spacer(modifier = Modifier.height(3.dp))
-            Text(text = "Square Units", // FIXED: More descriptive unit
+            Text(text = "Square Units",
                 fontSize = 23.sp,
                 fontWeight = FontWeight.Bold,
                 color = colorResource(R.color.Dark_Blue))
