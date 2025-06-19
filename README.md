@@ -48,50 +48,10 @@ implementation("org.mozilla:rhino:1.7R4")
 val nav_version = "2.9.0"
 implementation("androidx.navigation:navigation-compose:$nav_version")
 ```
-
----
-
-## 4. UI Design
-
-### Calculator Screen
-
-![Cal](app/src/main/java/com/example/calculator/UI_Image/cal_screen.jpg)
-
-### Home Screen
-
-![Cal](app/src/main/java/com/example/calculator/UI_Image/home_screen.jpg)
-
-### Type Of Area Screen
-
-![Cal](app/src/main/java/com/example/calculator/UI_Image/atype.jpg)
-
-### Area Calculator Screen
-
-![Cal](app/src/main/java/com/example/calculator/UI_Image/area_screen.jpg)
-
-### Type Of Volume Screen
-
-![Cal](app/src/main/java/com/example/calculator/UI_Image/vtype.jpg)
-
-### Volume Calculator Screen
-
-![Cal](app/src/main/java/com/example/calculator/UI_Image/volume_screen.jpg)
-
-### Formula List Screen
-
-![Cal](app/src/main/java/com/example/calculator/UI_Image/formula_screen.jpg)
-
-
-![Cal](app/src/main/java/com/example/calculator/UI_Image/formula_screens.jpg)
-
-### Tip Calculator Screen
-
-![Cal](app/src/main/java/com/example/calculator/UI_Image/tip_screen.jpg)
-
 ---
 
 ## 5. Conclusion
 
-**Calcify** is more than just a calculator — it's your everyday math assistant.
-From students, Calcify is designed to cater to all.
+**Calcify** is more than just a calculator — it's your everyday math assistant.  From students, Calcify is designed to cater to all.
+
 The app is open source, and contributions are welcome!
