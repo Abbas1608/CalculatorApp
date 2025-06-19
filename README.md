@@ -55,35 +55,38 @@ implementation("androidx.navigation:navigation-compose:$nav_version")
 
 ### Calculator Screen
 
-![Cal](Output/cal_screen.p)
+![Cal](app/src/main/java/com/example/calculator/UI_Image/cal_screen.jpg)
 
 ### Home Screen
 
-![Cal](Output/cal_screen.p)
+![Cal](app/src/main/java/com/example/calculator/UI_Image/home_screen.jpg)
 
 ### Type Of Area Screen
 
-![Cal](Output/cal_screen.p)
+![Cal](app/src/main/java/com/example/calculator/UI_Image/atype.jpg)
 
 ### Area Calculator Screen
 
-![Cal]()
+![Cal](app/src/main/java/com/example/calculator/UI_Image/area_screen.jpg)
 
 ### Type Of Volume Screen
 
-![Cal](Output/cal_screen.p)
+![Cal](app/src/main/java/com/example/calculator/UI_Image/vtype.jpg)
 
 ### Volume Calculator Screen
 
-![Cal](Output/cal_screen.p)
+![Cal](app/src/main/java/com/example/calculator/UI_Image/volume_screen.jpg)
 
 ### Formula List Screen
 
-![Cal](Output/cal_screen.p)
+![Cal](app/src/main/java/com/example/calculator/UI_Image/formula_screen.jpg)
+
+
+![Cal](app/src/main/java/com/example/calculator/UI_Image/formula_screens.jpg)
 
 ### Tip Calculator Screen
 
-![Cal](Output/cal_screen.p)
+![Cal](app/src/main/java/com/example/calculator/UI_Image/tip_screen.jpg)
 
 ---
 
@@ -91,4 +94,4 @@ implementation("androidx.navigation:navigation-compose:$nav_version")
 
 **Calcify** is more than just a calculator — it's your everyday math assistant.
 From students, Calcify is designed to cater to all.
-Calcify is more than just a calculator — it's your everyday math assistant. From students to working professionals, Calcify is designed to cater to all. The app is open source, and contributions are welcome!
+The app is open source, and contributions are welcome!
