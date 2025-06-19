@@ -1,4 +1,4 @@
-package com.example.calculator.Screen.AreaScreen
+package com.example.calculator.Screen.Formula
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -27,9 +26,8 @@ import com.example.calculator.Navigation.CalRoutes
 import com.example.calculator.R
 import com.example.calculator.ui.theme.HCardBrush
 
-
 @Composable
-fun AreaTopBar(NavController: NavHostController)
+fun FormulaScreenTopBar(NavController: NavHostController)
 {
     Box(
         modifier = Modifier
@@ -45,21 +43,20 @@ fun AreaTopBar(NavController: NavHostController)
             modifier = Modifier.padding(start = 20.dp)
                 .fillMaxSize()
                 .clickable(onClick = {
-                    NavController.navigate(CalRoutes.HomeScreen.name)
+                    NavController.navigate(CalRoutes.FormulaListScreen.name)
                 })
         ) {
 
             Icon(painter = painterResource(R.drawable.outline_keyboard_double_arrow_left_24),
                 contentDescription = null,
-                modifier = Modifier.size(35.dp)
-                   ,
+                modifier = Modifier.size(35.dp),
                 tint = colorResource(R.color.Dark_Blue))
 
             Spacer(modifier = Modifier.width(10.dp))
-                Text(text = "Type of Area",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 26.sp,
-                    color = colorResource(R.color.Dark_Blue),
+            Text(text = "Formula",
+                fontWeight = FontWeight.Bold,
+                fontSize = 26.sp,
+                color = colorResource(R.color.Dark_Blue),
 
                 )
 

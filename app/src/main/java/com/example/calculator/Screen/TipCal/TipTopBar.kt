@@ -43,14 +43,14 @@ fun TipTopBar(NavController: NavHostController)
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(start = 20.dp)
                 .fillMaxSize()
+                .clickable(onClick = {
+                    NavController.navigate(CalRoutes.HomeScreen.name)
+                })
         ) {
 
             Icon(painter = painterResource(R.drawable.outline_keyboard_double_arrow_left_24),
                 contentDescription = null,
-                modifier = Modifier.size(35.dp)
-                    .clickable(onClick = {
-                        NavController.navigate(CalRoutes.HomeScreen.name)
-                    }),
+                modifier = Modifier.size(35.dp),
                 tint = colorResource(R.color.Dark_Blue))
 
             Spacer(modifier = Modifier.width(10.dp))

@@ -10,6 +10,7 @@ import com.example.calculator.Screen.AreaScreen.AreaCalScreen
 import com.example.calculator.Screen.AreaScreen.AreaListScreen
 import com.example.calculator.Screen.CalulatorScreen.NormalCalculatorScreen
 import com.example.calculator.Screen.Formula.FormulaListScreen
+import com.example.calculator.Screen.Formula.FormulaScreen
 import com.example.calculator.Screen.HomeScreen.HomeScreen
 import com.example.calculator.Screen.SplitScreen.SplitScreen
 import com.example.calculator.Screen.TipCal.TipMainContent
@@ -54,7 +55,7 @@ fun CalNavigation() {
             }
 
         // Formula
-        composable (CalRoutes.FormulaScreen.name){
+        composable (CalRoutes.FormulaListScreen.name){
             FormulaListScreen(NavController)
         }
         // Tip Calculator
@@ -76,6 +77,14 @@ fun CalNavigation() {
         ) { backStackEntry ->
             val shapeType = backStackEntry.arguments?.getString("shapeType") ?: "Circle"
             VolumeCalScreen(NavController,shapeType)
+        }
+
+        composable(
+            route = "${CalRoutes.FormulaScreen.name}/{shapeType}",
+            arguments = listOf(navArgument("shapeType") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val shapeType = backStackEntry.arguments?.getString("shapeType") ?: "Circle"
+            FormulaScreen(NavController,shapeType)
         }
     }
 }

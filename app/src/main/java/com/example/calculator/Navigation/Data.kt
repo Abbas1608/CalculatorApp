@@ -28,3 +28,10 @@ data class ShapeData3(
     val labelText2: String,
     val labelText3: String
 )
+
+// Formula
+data class ShapeData4(
+    val image: Painter,
+    val text: String,
+    val formula: String
+)

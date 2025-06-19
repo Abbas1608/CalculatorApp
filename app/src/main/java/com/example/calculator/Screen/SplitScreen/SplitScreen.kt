@@ -31,9 +31,9 @@ fun SplitScreen(NavController: NavHostController) {
 
 
     LaunchedEffect(Unit) {
-        kotlinx.coroutines.delay(4000)  // 2 seconds delay
+        kotlinx.coroutines.delay(2000)  // 2 seconds delay
         NavController.navigate(CalRoutes.NormalCalculatorScreen.name){
-            popUpTo(0) // Optional: remove splash from back stack
+            popUpTo(0)
         }
     }
 
@@ -71,7 +71,7 @@ fun SplitScreen(NavController: NavHostController) {
 
     ) {
         Text(
-            text = "Design By Abbas Shaikh",
+            text = "Developed By Abbas Shaikh",
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
             color = colorResource(R.color.Dark_Blue),

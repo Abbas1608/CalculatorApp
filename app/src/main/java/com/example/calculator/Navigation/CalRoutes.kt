@@ -11,10 +11,11 @@ enum class CalRoutes {
     NormalCalculatorScreen,
     AreaListScreen,
     VolumeListScreen,
-    FormulaScreen,
+    FormulaListScreen,
     TipCalculator,
     AreaCalScreen,
-    VolumeCalScreen;
+    VolumeCalScreen,
+    FormulaScreen;
     companion object{
         fun fromRoutes(routes: String?): CalRoutes
         = when(routes?.substringBefore("/"))
@@ -24,6 +25,7 @@ enum class CalRoutes {
             NormalCalculatorScreen.name -> NormalCalculatorScreen
             AreaListScreen.name -> AreaListScreen
             VolumeListScreen.name -> VolumeListScreen
+            FormulaListScreen.name -> FormulaListScreen
             FormulaScreen.name -> FormulaScreen
             TipCalculator.name -> TipCalculator
             AreaCalScreen.name -> AreaCalScreen

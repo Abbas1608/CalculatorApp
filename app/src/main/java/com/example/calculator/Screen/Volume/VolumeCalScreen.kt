@@ -33,7 +33,7 @@ fun VolumeCalScreen(NavController: NavHostController, shapeType: String)
         )
 
         "Tetrahedron" -> ShapeData1(
-            image = painterResource(R.drawable.triangle),
+            image = painterResource(R.drawable.tetrahedron_image),
             text = "Volume Of Tetrahedron",
             formula = "a^3 / 6√2",
             labelText = "Enter Edge"
@@ -55,7 +55,7 @@ fun VolumeCalScreen(NavController: NavHostController, shapeType: String)
         )
 
         "Triangle_Prism" -> ShapeData2(
-            image = painterResource(R.drawable.triangle_prism),
+            image = painterResource(R.drawable.triangle_prism_image),
             text = "Volume Of Triangle Prism",
             formula = "Area of base triangle x length of prism",
             labelText1 = "Enter Area of triangle",

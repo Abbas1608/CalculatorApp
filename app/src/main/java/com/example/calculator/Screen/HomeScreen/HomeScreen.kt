@@ -47,7 +47,7 @@ fun HomeScreen(NavController: NavHostController)
 
         Row {
             VCard(painterResource(R.drawable.logo),"Formula", onClick = {
-                NavController.navigate(route = CalRoutes.FormulaScreen.name)
+                NavController.navigate(route = CalRoutes.FormulaListScreen.name)
             })
 
 

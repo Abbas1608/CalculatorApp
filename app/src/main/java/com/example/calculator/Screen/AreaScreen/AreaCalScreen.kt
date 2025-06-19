@@ -23,20 +23,20 @@ fun AreaCalScreen(NavController: NavHostController, shapeType: String) {
             labelText = "Enter Radius"
         )
         "Square" -> ShapeData1(
-            image = painterResource(R.drawable.square),
+            image = painterResource(R.drawable.square_image),
             text = "Area Of Square",
             formula = "side²",
             labelText = "Enter Side Length"
         )
         "Rectangle" -> ShapeData2(
-            image = painterResource(R.drawable.cuboi_image),
+            image = painterResource(R.drawable.rectangle_image),
             text = "Area Of Rectangle",
             formula = "length × width",
             labelText1 = "Enter Length",
             labelText2 = "Enter Width"
         )
         "Triangle" -> ShapeData2(
-            image = painterResource(R.drawable.triangle),
+            image = painterResource(R.drawable.triangle_image),
             text = "Area Of Triangle",
             formula = "½ × base × height",
             labelText1 = "Enter Base",
@@ -58,7 +58,7 @@ fun AreaCalScreen(NavController: NavHostController, shapeType: String) {
         )
 
         "Trapezoid" -> ShapeData3(
-            image = painterResource(R.drawable.trapezoid),
+            image = painterResource(R.drawable.trapezoid_image),
             text = "Area Of Trapezoid",
             formula = "½ × (a + b) × h",
             labelText1 = "Enter Side A",
