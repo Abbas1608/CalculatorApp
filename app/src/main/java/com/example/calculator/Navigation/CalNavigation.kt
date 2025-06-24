@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.calculator.Screen.AreaScreen.AreaCalScreen
 import com.example.calculator.Screen.AreaScreen.AreaListScreen
+import com.example.calculator.Screen.CGPA.CgpaScreen
 import com.example.calculator.Screen.CalulatorScreen.NormalCalculatorScreen
 import com.example.calculator.Screen.Formula.FormulaListScreen
 import com.example.calculator.Screen.Formula.FormulaScreen
@@ -85,6 +86,11 @@ fun CalNavigation() {
         ) { backStackEntry ->
             val shapeType = backStackEntry.arguments?.getString("shapeType") ?: "Circle"
             FormulaScreen(NavController,shapeType)
+        }
+
+        // Cgpa Calculator
+        composable (CalRoutes.CgpaScreen.name){
+            CgpaScreen(NavController)
         }
     }
 }

@@ -15,7 +15,8 @@ enum class CalRoutes {
     TipCalculator,
     AreaCalScreen,
     VolumeCalScreen,
-    FormulaScreen;
+    FormulaScreen,
+    CgpaScreen;
     companion object{
         fun fromRoutes(routes: String?): CalRoutes
         = when(routes?.substringBefore("/"))
@@ -30,6 +31,7 @@ enum class CalRoutes {
             TipCalculator.name -> TipCalculator
             AreaCalScreen.name -> AreaCalScreen
             VolumeCalScreen.name -> VolumeCalScreen
+            CgpaScreen.name -> CgpaScreen
             null -> NormalCalculatorScreen
             else ->throw IllegalArgumentException("Routes unExcepted")
         }

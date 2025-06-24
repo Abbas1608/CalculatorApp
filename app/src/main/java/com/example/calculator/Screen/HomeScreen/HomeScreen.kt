@@ -30,6 +30,7 @@ fun HomeScreen(NavController: NavHostController)
 
         Spacer(modifier = Modifier.height(20.dp))
 
+        //1
         Row {
             VCard(painterResource(R.drawable.area),"Area", onClick = {
                 NavController.navigate(route = CalRoutes.AreaListScreen.name)
@@ -45,6 +46,7 @@ fun HomeScreen(NavController: NavHostController)
 
         Spacer(modifier = Modifier.height(20.dp))
 
+        //2
         Row {
             VCard(painterResource(R.drawable.formula_icon),"Formula", onClick = {
                 NavController.navigate(route = CalRoutes.FormulaListScreen.name)
@@ -56,6 +58,20 @@ fun HomeScreen(NavController: NavHostController)
             VCard(painterResource(R.drawable.tip_icon),"Tip Calculator",onClick = {
                 NavController.navigate(route = CalRoutes.TipCalculator.name)
             })
+        }
+        Spacer(modifier = Modifier.height(20.dp))
+
+        //3
+        Row {
+            VCard(painterResource(R.drawable.formula_icon),"CGPA", onClick = {
+                NavController.navigate(route = CalRoutes.CgpaScreen.name)
+            })
+
+          //  Spacer(modifier = Modifier.width(10.dp))
+//
+//            VCard(painterResource(R.drawable.tip_icon),"Tip Calculator",onClick = {
+//                NavController.navigate(route = CalRoutes.TipCalculator.name)
+//            })
         }
 
     }
