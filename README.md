@@ -7,8 +7,9 @@
 - 🧮 Smart Calculator  
 - 📏 Area & Volume Calculator  
 - 📐 Geometry Formula List  
-- 💸 Tip Calculator  
-- ➕ And more...
+- 💸 Tip Calculator
+- ➕ CGPA Calculator
+- And more...
   
 Calcify is designed to make mathematical operations easy and accessible for everyone. Whether you're solving daily arithmetic, measuring room dimensions, or quickly checking geometry formulas, Calcify brings it all under one elegant and intuitive interface.
 
